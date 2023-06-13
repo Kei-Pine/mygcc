@@ -3,35 +3,39 @@
 
 
 int main(int argc, char *argv[]){
-    if(argc==3){
-    char command[100];
-    sprintf(command, "gcc %s",argv[1]);
-    system(command);
-    sprintf(command, "move a.exe %s.exe",argv[2]);
-    system(command);
-    printf("a file : %s.exe is created\n",argv[2]);
-    }
+    if (argc == 3) {
+        // Compile the C source file
+        char compileCommand[100];
+        snprintf(compileCommand, sizeof(compileCommand), "gcc %s", argv[1]);
+        system(compileCommand);
 
-    else if (argc==2){
-               
+        // Rename the compiled output to the desired executable filename
+        char moveCommand[100];
+        snprintf(moveCommand, sizeof(moveCommand), "move a.exe %s.exe", argv[2]);
+        system(moveCommand);
+
+        printf("A file named %s.exe is created\n", argv[2]);
+    }
+    else if (argc == 2) {
         char exefilename[100];
-        puts("decide filename");
-        scanf("%s",&exefilename);
+        puts("Decide filename");
+        scanf("%s", exefilename);
 
-        char command[100];
-        sprintf(command, "gcc %s",argv[1]);
-        system(command);
- 
-        sprintf(command, "move a.exe %s.exe",exefilename);
-        system(command);
+        // Compile the C source file
+        char compileCommand[100];
+        snprintf(compileCommand, sizeof(compileCommand), "gcc %s", argv[1]);
+        system(compileCommand);
 
-         printf("a file : %s.exe is created\n",exefilename);
+        // Rename the compiled output to the user-specified executable filename
+        char moveCommand[100];
+        snprintf(moveCommand, sizeof(moveCommand), "move a.exe %s.exe", exefilename);
+        system(moveCommand);
+
+        printf("A file named %s.exe is created\n", exefilename);
     }
-
-    else puts("Usage:mygccc target.c exefilename ");
-    
-
-
+    else {
+        puts("Usage: mygccc target.c exefilename");
+    }
 
     return 0;
 }
